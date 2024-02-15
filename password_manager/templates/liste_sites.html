@@ -9,7 +9,7 @@
     <h1>Liste des sites</h1>
     <ul>
         {% for site in sites %}
-            <li>{{ site.nom }} - <a href="{{ site.url }}">{{ site.url }}</a> - {{ site.identifiant }}</li>
+            <li><a href="{% url 'detail_site' site_id=site.pk %}">{{ site.nom }}</a></li>
         {% empty %}
             <li>Aucun site trouvé.</li>
         {% endfor %}

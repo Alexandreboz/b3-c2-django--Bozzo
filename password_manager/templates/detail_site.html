@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du site</title>
+</head>
+<body>
+    <h1>Détails du site</h1>
+    <ul>
+        <li><strong>Nom:</strong> {{ site.nom }}</li>
+        <li><strong>URL:</strong> <a href="{{ site.url }}">{{ site.url }}</a></li>
+        <li><strong>Identifiant:</strong> {{ site.identifiant }}</li>
+        <li><strong>Mot de passe:</strong> {{ site.mot_de_passe }}</li>
+    </ul>
+    
+    <p>
+        <a href="{% url 'modifier_site' site_id=site.pk %}">Modifier</a> |
+        <a href="{% url 'supprimer_site' site_id=site.pk %}">Supprimer</a>
+    </p>
+</body>
+</html>
