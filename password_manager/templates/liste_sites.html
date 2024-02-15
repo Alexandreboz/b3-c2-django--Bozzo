@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des sites</title>
+</head>
+<body>
+    <h1>Liste des sites</h1>
+    <ul>
+        {% for site in sites %}
+            <li>{{ site.nom }} - <a href="{{ site.url }}">{{ site.url }}</a> - {{ site.identifiant }}</li>
+        {% empty %}
+            <li>Aucun site trouvé.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'ajouter_site' %}">Ajouter un nouveau site</a>
+</body>
+</html>
