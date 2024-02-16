@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un nouveau site</title>
+    <title>Détails du site</title>
     <style>
         body.light-mode {
             background-color: #f5f5f5;
@@ -15,7 +15,7 @@
             background-color: #222;
             color: #fff;
         }
-        /* Styles pour le corps de la page */
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -24,75 +24,55 @@
             color: #fff;
         }
 
-        /* Styles pour le conteneur principal */
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 50px auto;
             padding: 20px;
             background-color: #333;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
-        /* Styles pour le titre */
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
             color: #007bff;
-            text-align: center;
         }
 
-        /* Styles pour le formulaire */
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Styles pour les étiquettes */
-        label {
+        p {
             font-size: 18px;
             margin-bottom: 10px;
             color: #fff;
         }
 
-        /* Styles pour les champs de texte */
-        input[type="text"],
-        input[type="password"] {
-            padding: 8px;
-            margin-bottom: 15px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            background-color: #444;
-            color: #fff;
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        /* Styles pour le bouton */
         button {
-            padding: 10px 20px;
-            background-color: #007bff;
+            padding: 8px 16px;
+            background-color: #dc3545;
             color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #c82333;
         }
 
-        /* Styles pour la flèche de retour */
-        .back-arrow {
+        .back-link {
             position: absolute;
             top: 20px;
             left: 20px;
-            font-size: 24px;
             color: #007bff;
-            text-decoration: none;
         }
+
         #toggle-mode-btn {
             position: fixed;
             top: 20px;
@@ -110,20 +90,20 @@
 
 <body class="light-mode">
     <button id="toggle-mode-btn" onclick="toggleMode()">Mode sombre</button>
-    <a href="{% url 'liste_sites' %}" class="back-arrow">&lt; Retour</a>
     <div class="container">
-        <h1>Ajouter un nouveau site</h1>
-        <form method="post">
+        <a href="{% url 'liste_sites' %}" class="back-link">&lt; Retour</a>
+        <h1>Détails du site</h1>
+        <p>Nom du site : {{ site.nom }}</p>
+        <p>URL : <a href="{{ site.url }}">{{ site.url }}</a></p>
+        <p>Identifiant : {{ site.identifiant }}</p>
+
+        <!-- Ajouter un lien pour modifier le site -->
+        <a href="{% url 'modifier_site' site_id=site.id %}">Modifier</a>
+
+        <!-- Ajouter un formulaire pour supprimer le site -->
+        <form method="post" action="{% url 'supprimer_site' site_id=site.id %}">
             {% csrf_token %}
-            <label for="id_nom">Nom du site :</label>
-            <input type="text" id="id_nom" name="nom">
-            <label for="id_url">URL :</label>
-            <input type="text" id="id_url" name="url">
-            <label for="id_identifiant">Identifiant :</label>
-            <input type="text" id="id_identifiant" name="identifiant">
-            <label for="id_mot_de_passe">Mot de passe :</label>
-            <input type="password" id="id_mot_de_passe" name="mot_de_passe">
-            <button type="submit">Enregistrer</button>
+            <button type="submit">Supprimer</button>
         </form>
     </div>
     <script>
