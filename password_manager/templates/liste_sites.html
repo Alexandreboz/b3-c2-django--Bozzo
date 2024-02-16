@@ -5,54 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des sites</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body.dark-mode {
+            background-color: #242f3e;
+            color: #fff;
+        }
+
         body.light-mode {
-            background-color: #f5f5f5;
+            background-color: #f0f0f0;
             color: #333;
         }
 
-        body.dark-mode {
-            background-color: #222;
-            color: #fff;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #222;
-            color: #fff;
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #303d50;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
-            color: #007bff;
+            color: #fff;
             text-align: center;
             margin-top: 20px;
         }
 
         ul {
+            list-style-type: none;
             padding: 0;
             margin: 0;
         }
 
-        .card {
-            background-color: #333;
+        li {
+            background-color: #3e4f67;
+            padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-content {
-            padding: 10px;
-            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         a {
-            color: #007bff;
+            color: #fff;
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        form {
+            background-color: #3e4f67;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         button {
-            background-color: #007bff;
+            background-color: #dc3545;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -61,55 +69,49 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #004691;
         }
-        #toggle-mode-btn {
-            position: fixed;
+
+        p {
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .toggle-button {
+            position: absolute;
             top: 20px;
             right: 20px;
-            padding: 10px 20px;
+            background-color: #0056b3;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #007bff;
             color: #fff;
-            z-index: 9999;
+            cursor: pointer;
+            font-size: 16px;
         }
+
     </style>
 </head>
 
 <body class="light-mode">
-    <button id="toggle-mode-btn" onclick="toggleMode()">Mode sombre</button>
-    <h1>Liste des sites</h1>
-    <ul>
-        {% for site in sites %}
-        <li class="card">
-            <div class="card-content">
-                <a href="{{ site.url }}">{{ site.nom }}</a> - <a href="{% url 'detail_site' site_id=site.id %}">Modifier</a>
-            </div>
-        </li>
-        {% empty %}
-        <li>Aucun site trouvé.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'ajouter_site' %}" style="display: block; text-align: center; margin-top: 20px;">Ajouter un nouveau
-        site</a>
-        <script>
-            function toggleMode() {
-                const body = document.body;
-                if (body.classList.contains('dark-mode')) {
-                    // Si le mode sombre est actuellement activé, basculer vers le mode clair
-                    body.classList.remove('dark-mode');
-                    body.classList.add('light-mode');
-                    document.getElementById('toggle-mode-btn').textContent = 'Mode sombre';
-                } else {
-                    // Sinon, basculer vers le mode sombre
-                    body.classList.remove('light-mode');
-                    body.classList.add('dark-mode');
-                    document.getElementById('toggle-mode-btn').textContent = 'Mode clair';
-                }
-            }
-        </script>
+    <div class="container">
+        <h1>Liste des sites</h1>
+        <ul>
+            {% for site in sites %}
+            <li>  <a href="{{ site.url }}">{{ site.nom }}</a> - <a href="{% url 'detail_site' site_id=site.id %}">Modifier</a>
+            </li>
+            {% empty %}
+            <li>Aucun site trouvé.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'ajouter_site' %}" style="display: block; text-align: center; margin-top: 20px; color: #fff;">Ajouter un nouveau site</a>
+        <button class="toggle-button" onclick="toggleMode()">Toggle Mode</button>
+    </div>
+
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+        }
+    </script>
 </body>
 
 </html>
