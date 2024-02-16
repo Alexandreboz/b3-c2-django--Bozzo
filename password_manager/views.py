@@ -33,3 +33,8 @@ def supprimer_site(request, site_id):
         site.delete()
         return redirect('liste_sites')
     return render(request, 'supprimer_site.html', {'site': site})
+
+def detail_site(request, site_id):
+    site = Site.objects.get(id=site_id)
+    # Ajoutez ici le code pour afficher les détails du site
+    return render(request, 'detail_site.html', {'site': site})
