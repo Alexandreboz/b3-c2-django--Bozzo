@@ -96,7 +96,7 @@
         <h1>Liste des sites</h1>
         <ul>
             {% for site in sites %}
-            <li>  <a href="{{ site.url }}">{{ site.nom }}</a> - <a href="{% url 'detail_site' site_id=site.id %}">Modifier</a>
+            <li>  <a href="{{ site.url }}">{{ site.nom }}</a> - <a href="{% url 'detail_site' site_id=site.id %}">Information du site</a>
             </li>
             {% empty %}
             <li>Aucun site trouvé.</li>
@@ -108,17 +108,14 @@
 
     <script>
         function toggleMode() {
-            const body = document.body;
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            var button = document.querySelector('.toggle-button');
             if (body.classList.contains('dark-mode')) {
-                // Si le mode sombre est actuellement activé, basculer vers le mode clair
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                document.getElementById('toggle-mode-btn').textContent = 'Mode sombre';
+                button.textContent = 'Light Mode';
             } else {
-                // Sinon, basculer vers le mode sombre
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                document.getElementById('toggle-mode-btn').textContent = 'Mode clair';
+                button.textContent = 'Dark Mode';
             }
         }
     </script>

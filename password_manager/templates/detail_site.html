@@ -55,7 +55,7 @@
         }
 
         button:hover {
-            background-color: #c82333;
+            background-color: #0056b3;
         }
 
         .back-link {
@@ -80,15 +80,15 @@
         }
 
         .light-mode a {
-            color: #007bff;
+            color: #004691;
         }
 
         .light-mode button {
-            background-color: #007bff;
+            background-color: #004691;
         }
 
         .light-mode button:hover {
-            background-color: #0056b3;
+            background-color: #004691;
         }
 
         /* Bouton de basculement du mode */
@@ -96,13 +96,12 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background-color: transparent;
+            background-color: #0056b3;
             border: none;
             color: #fff;
             cursor: pointer;
             font-size: 16px;
         }
-
     </style>
 </head>
 
@@ -128,17 +127,14 @@
 
     <script>
         function toggleMode() {
-            const body = document.body;
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            var button = document.querySelector('.toggle-button');
             if (body.classList.contains('dark-mode')) {
-                // Si le mode sombre est actuellement activé, basculer vers le mode clair
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                document.getElementById('toggle-mode-btn').textContent = 'Mode sombre';
+                button.textContent = 'Light Mode';
             } else {
-                // Sinon, basculer vers le mode sombre
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                document.getElementById('toggle-mode-btn').textContent = 'Mode clair';
+                button.textContent = 'Dark Mode';
             }
         }
     </script>
