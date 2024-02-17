@@ -96,7 +96,7 @@
         <h1>Liste des sites</h1>
         <ul>
             {% for site in sites %}
-            <li>  <a href="{{ site.url }}">{{ site.nom }}</a> - <a href="{% url 'detail_site' site_id=site.id %}">Modifier</a>
+            <li>  <a href="{{ site.url }}">{{ site.nom }}</a> - <a href="{% url 'detail_site' site_id=site.id %}">Information du site</a>
             </li>
             {% empty %}
             <li>Aucun site trouvé.</li>
