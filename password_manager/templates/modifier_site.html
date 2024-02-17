@@ -1,16 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body.dark-mode {
+            background-color: #242f3e;
+            color: #fff;
+        }
+
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #303d50;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            background-color: #3e4f67;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #004691;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #0056b3;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
 </head>
-<body>
-    <h1>Modifier un site</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enregistrer</button>
-    </form>
+
+<body class="light-mode">
+    <div class="container">
+        <a href="{% url 'liste_sites' %}" class="back-link">&lt; Retour</a>
+        <h1>Modifier un site</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enregistrer</button>
+        </form>
+        <button class="toggle-button" onclick="toggleMode()">Toggle Mode</button>
+    </div>
+
+    <script>
+        function toggleMode() {
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            var button = document.querySelector('.toggle-button');
+            if (body.classList.contains('dark-mode')) {
+                button.textContent = 'Light Mode';
+            } else {
+                button.textContent = 'Dark Mode';
+            }
+        }
+    </script>
 </body>
+
 </html>

@@ -5,39 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body.light-mode {
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
         body.dark-mode {
-            background-color: #222;
+            background-color: #242f3e;
             color: #fff;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #222;
-            color: #fff;
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
         }
 
         .container {
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #333;
+            background-color: #303d50;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #007bff;
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
         }
 
         p {
@@ -47,7 +39,7 @@
         }
 
         a {
-            color: #007bff;
+            color: #fff;
             text-decoration: none;
             font-weight: bold;
         }
@@ -63,33 +55,57 @@
         }
 
         button:hover {
-            background-color: #c82333;
+            background-color: #0056b3;
         }
 
         .back-link {
             position: absolute;
             top: 20px;
             left: 20px;
-            color: white;
+            color: #fff;
         }
 
-        #toggle-mode-btn {
-            position: fixed;
+        /* Styles pour le mode clair */
+        .light-mode .container {
+            background-color: #f5f5f5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode h1 {
+            color: #007bff;
+        }
+
+        .light-mode p {
+            color: #333;
+        }
+
+        .light-mode a {
+            color: #004691;
+        }
+
+        .light-mode button {
+            background-color: #004691;
+        }
+
+        .light-mode button:hover {
+            background-color: #004691;
+        }
+
+        /* Bouton de basculement du mode */
+        .toggle-button {
+            position: absolute;
             top: 20px;
             right: 20px;
-            padding: 10px 20px;
+            background-color: #0056b3;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #007bff;
             color: #fff;
-            z-index: 9999;
+            cursor: pointer;
+            font-size: 16px;
         }
     </style>
 </head>
 
 <body class="light-mode">
-    <button id="toggle-mode-btn" onclick="toggleMode()">Mode sombre</button>
     <div class="container">
         <a href="{% url 'liste_sites' %}" class="back-link">&lt; Retour</a>
         <h1>Détails du site</h1>
@@ -105,20 +121,20 @@
             {% csrf_token %}
             <button type="submit">Supprimer</button>
         </form>
+        <!-- Bouton de basculement du mode -->
+        <button class="toggle-button" onclick="toggleMode()">Toggle Mode</button>
     </div>
+
     <script>
         function toggleMode() {
-            const body = document.body;
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            var button = document.querySelector('.toggle-button');
             if (body.classList.contains('dark-mode')) {
-                // Si le mode sombre est actuellement activé, basculer vers le mode clair
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                document.getElementById('toggle-mode-btn').textContent = 'Mode sombre';
+                button.textContent = 'Light Mode';
             } else {
-                // Sinon, basculer vers le mode sombre
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                document.getElementById('toggle-mode-btn').textContent = 'Mode clair';
+                button.textContent = 'Dark Mode';
             }
         }
     </script>
