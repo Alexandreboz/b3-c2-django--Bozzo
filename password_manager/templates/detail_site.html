@@ -112,6 +112,7 @@
         <p>Nom du site : {{ site.nom }}</p>
         <p>URL : <a href="{{ site.url }}">{{ site.url }}</a></p>
         <p>Identifiant : {{ site.identifiant }}</p>
+        <p>Mot de passe : {{ site.mot_de_passe }}</p>
 
         <!-- Ajouter un lien pour modifier le site -->
         <a href="{% url 'modifier_site' site_id=site.id %}">Modifier</a>
